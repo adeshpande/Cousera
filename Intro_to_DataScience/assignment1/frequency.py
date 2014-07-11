@@ -1,3 +1,6 @@
+''' Calcultes term Freq from Twitter data'''
+
+
 import sys
 import json
 
@@ -43,22 +46,40 @@ def get_sentiment_metric(tweet, sent_dict):
     return sent_word,sent_prop
 
 
+
+def get_term_dict(tweet_fh):
+    '''Returns term dict '''
+    term_dict = {}
+
+    for line in tweet_fh.readlines():
+        tweet_dict = json.loads(line)
+        if 'text' in tweet_dict and tweet_dict['lang']=='en': ## Only english tweets
+            tweet = tweet_dict['text']
+            for word in tweet.split():
+                if not word.startswith(('@','http','RT')):   ## ignore stuff
+                    if word in term_dict:
+                        term_dict[word] +=1
+                    else:
+                        term_dict[word] = 1
+
+    return term_dict
+
+
 def main():
-    sent_file = open(sys.argv[1])
-    tweet_file = open(sys.argv[2])
+    #sent_file = open(sys.argv[1])
+    tweet_file = open(sys.argv[1])
     #hw()
     #lines(sent_file)
     #lines(tweet_file)
 
-    ##load sent dictionary
-    sent_dict = load_sentiment(sent_file)
+    ##load term dictionary
+    term_dict = get_term_dict(tweet_file)
 
-    for line in tweet_file.readlines():
-        tweet_dict = json.loads(line)
-        if 'text' in tweet_dict and tweet_dict['lang']=='en': ## Only english tweets
-            tweet = tweet_dict['text']
-            sent_word, sent_metric = get_sentiment_metric(tweet, sent_dict)
-            print "%s, %s" % (sent_word, sent_metric)
+    ##iterate over term dict
+    total_terms =len(term_dict)
+    for key,value in term_dict.items():
+        prop = float(value)/float(total_terms)
+        print "%s %s" % (key,prop)
 
 
 if __name__ == '__main__':
