@@ -15,7 +15,7 @@ def main():
     ##iterate
     for line in tweet_file.readlines():
         tweet_dict = json.loads(line)
-        if 'text' in tweet_dict and tweet_dict['lang']=='en': ## Only english tweets
+        if 'text' in tweet_dict and 'lang' in tweet_dict and tweet_dict['lang']=='en': ## Only english tweets
             tweet = tweet_dict['text']
             #print tweet_dict['entities']
             if 'entities' in tweet_dict and tweet_dict['entities'].get('hashtags', None):    ## if contains hastag
@@ -31,7 +31,7 @@ def main():
     ## sort and print
     count = 0
     for k in sorted(hash_dict, key=hash_dict.get, reverse=True):
-        if count<11:
+        if count<10:
             print "%s %s " % (k, hash_dict[k])
             count+=1
         else:

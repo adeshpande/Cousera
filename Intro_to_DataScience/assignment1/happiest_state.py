@@ -155,7 +155,8 @@ def main():
 
     #print state_sent_dict
     for k in sorted(state_sent_dict, key=state_sent_dict.get, reverse=True):
-        print "%s in the happiest state " % k
+        #print "%s in the happiest state " % k
+        print "%s " % k
         break
 
 

@@ -13,7 +13,7 @@ def load_sentiment(senti_fh):
      for line in senti_fh:
          key, value = line.split('\t')
          senti_dict[key] = value
-     print "there are %s words in this file" % len(senti_dict)
+     #print "there are %s words in this file" % len(senti_dict)
      return senti_dict
 
 def get_sentiment_metric(tweet, sent_dict):
