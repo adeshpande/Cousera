@@ -9,7 +9,7 @@ def load_sentiment(senti_fh):
      for line in senti_fh:
          key, value = line.split('\t')
          senti_dict[key] = value
-     print "there are %s words in this file" % len(senti_dict)
+     #print "there are %s words in this file" % len(senti_dict)
      return senti_dict
 
 def load_states():
@@ -144,7 +144,7 @@ def main():
                 #print tweet_dict['place']
                 state = get_place(place_dict, states_dict)
                 if state:
-                    print state
+                    #print state
                     ## Get sentiment
                     sent_word, state_sent = get_sentiment_metric(tweet, sent_dict)
                     ## Append to final dict
@@ -153,7 +153,7 @@ def main():
                     else:
                         state_sent_dict[state]=state_sent
 
-    print state_sent_dict
+    #print state_sent_dict
     for k in sorted(state_sent_dict, key=state_sent_dict.get, reverse=True):
         print "%s in the happiest state " % k
         break

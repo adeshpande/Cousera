@@ -55,10 +55,11 @@ def main():
 
     for line in tweet_file.readlines():
         tweet_dict = json.loads(line)
-        if 'text' in tweet_dict and tweet_dict['lang']=='en': ## Only english tweets
-            tweet = tweet_dict['text']
-            sent_word, sent_metric = get_sentiment_metric(tweet, sent_dict)
-            print "%s, %s" % (sent_word, sent_metric)
+        if 'text' in tweet_dict and 'lang' in tweet_dict:
+            if tweet_dict['lang']=='en': ## Only english tweets
+                tweet = tweet_dict['text']
+                sent_word, sent_metric = get_sentiment_metric(tweet, sent_dict)
+                print "%s, %s" % (sent_word, sent_metric)
 
 
 if __name__ == '__main__':

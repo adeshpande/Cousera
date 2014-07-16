@@ -17,7 +17,7 @@ def load_sentiment(senti_fh):
     for line in senti_fh:
         key, value = line.split('\t')
         senti_dict[key] = value
-    print "there are %s words in this file" % len(senti_dict)
+    #print "there are %s words in this file" % len(senti_dict)
     return senti_dict
 
 
@@ -47,7 +47,8 @@ def main():
         if 'text' in tweet_dict and tweet_dict['lang']=='en': ## Only english tweets
             tweet = tweet_dict['text']
             tweet_score = get_tweet_score(tweet, senti_dict)
-            print "%s --> %s" % (tweet, tweet_score)
+            #print "%s --> %s" % (tweet, tweet_score)
+            print "%s" % (tweet_score)
 
     sent_file.close()
     tweet_file.close()
